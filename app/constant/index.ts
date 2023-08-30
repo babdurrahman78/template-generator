@@ -129,4 +129,44 @@ const JADWAL = {
       JALSAH: TAHFIZH_10,
     },
   },
+  SENIN_MLM: {
+    PESAN_9: {
+      JALSAH: TADZKIRATUS_SAMI,
+      TEMPAT: AL_IKHLAS,
+    },
+    PESAN_10: {
+      JALSAH: MINHAJUL_QASHIDIN,
+      TEMPAT: MAKTABAH_BAWAH,
+    },
+  },
+  SELASA_PG: {
+    PESAN_9: {
+      JALSAH: TIBYAN_FII_ADAB_HAMALATIL_QURAN,
+      TEMPAT: AL_IKHLAS,
+    },
+    PESAN_10: {
+      JALSAH: QALAIDUL_IQYAN,
+      TEMPAT: MAKTABAH_BAWAH,
+    },
+  },
+  SELASA_MLM: {
+    PESAN_9: {
+      JALSAH: TADZKIRATUS_SAMI,
+      TEMPAT: AL_IKHLAS,
+    },
+    PESAN_10: {
+      JALSAH: MINHAJUL_QASHIDIN,
+      TEMPAT: MAKTABAH_BAWAH,
+    },
+  },
+  RABU_PG: {
+    PESAN_9: {
+      JALSAH: TAHFIZH_9,
+      TEMPAT: TMPT_COMB,
+    },
+    PESAN_10: {
+      JALSAH: TAHFIZH_10,
+      TEMPAT: TMPT_COMB,
+    },
+  },
 };
