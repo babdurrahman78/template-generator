@@ -22,8 +22,9 @@ export const TEMPAT = {
   AL_IKHLAS: "Masjid Al - Ikhlas",
   MAKTABAH_ATAS: "Maktabah Atas PESAN BISA",
   MAKTABAH_BAWAH: "Maktabah Bawah PESAN BISA",
-  ASRAMA_AKHWAT: "Asrama Akhwat",
   TMPT_COMB: "Masjid Al - Ikhlas(Ikhwan) dan Asrama Akhwat(Akhwat)",
+  TMPT_COMB1: "Maktabah Atas PESAN BISA(Ikhwan) dan Asrama Akhwat(Akhwat)",
+  TMPT_COMB2: "Maktabah Bawah PESAN BISA(Ikhwan) dan Asrama Akhwat(Akhwat)",
 } as const;
 
 const {
@@ -37,8 +38,14 @@ const {
   AZMI_ZHAFIRAH,
   ABID_ZHAFIRAH,
 } = PENGAJAR;
-const { AL_IKHLAS, ASRAMA_AKHWAT, MAKTABAH_ATAS, MAKTABAH_BAWAH, TMPT_COMB } =
-  TEMPAT;
+const {
+  AL_IKHLAS,
+  MAKTABAH_ATAS,
+  MAKTABAH_BAWAH,
+  TMPT_COMB,
+  TMPT_COMB1,
+  TMPT_COMB2,
+} = TEMPAT;
 
 export const JALSAH: {
   [key: string]: IJalsah;
@@ -112,7 +119,7 @@ const {
   TASMI,
 } = JALSAH;
 
-const JADWAL = {
+export const JADWAL = {
   AHAD_MLM: {
     PESAN_9: {
       JALSAH: TASMI,
@@ -167,6 +174,56 @@ const JADWAL = {
     PESAN_10: {
       JALSAH: TAHFIZH_10,
       TEMPAT: TMPT_COMB,
+    },
+  },
+  RABU_MLM: {
+    PESAN_9: {
+      JALSAH: ARBAIN_NAWAWIYAH,
+      TEMPAT: MAKTABAH_BAWAH,
+    },
+    PESAN_10: {
+      JALSAH: TAJWID_BISA,
+      TEMPAT: TMPT_COMB1,
+    },
+  },
+  KAMIS_PG: {
+    PESAN_9: {
+      JALSAH: AJURUMIYYAH,
+      TEMPAT: TMPT_COMB2,
+    },
+    PESAN_10: {
+      JALSAH: SHARAF_BISA,
+      TEMPAT: TMPT_COMB1,
+    },
+  },
+  KAMIS_MLM: {
+    PESAN_9: {
+      JALSAH: TIBYAN_FII_ADAB_HAMALATIL_QURAN,
+      TEMPAT: MAKTABAH_BAWAH,
+    },
+    PESAN_10: {
+      JALSAH: SHARAF_BISA,
+      TEMPAT: TMPT_COMB1,
+    },
+  },
+  JUMAT_PG: {
+    PESAN_9: {
+      JALSAH: QALAIDUL_IQYAN,
+      TEMPAT: MAKTABAH_BAWAH,
+    },
+    PESAN_10: {
+      JALSAH: TAHFIZH_10,
+      TEMPAT: TMPT_COMB,
+    },
+  },
+  JUMAT_MLM: {
+    PESAN_9: {
+      JALSAH: GHAYAH_WA_TAQRIB,
+      TEMPAT: MAKTABAH_BAWAH,
+    },
+    PESAN_10: {
+      JALSAH: HIWAR,
+      TEMPAT: MAKTABAH_ATAS,
     },
   },
 };
