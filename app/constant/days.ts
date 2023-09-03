@@ -1,1 +1,9 @@
-export const days = ["SENIN", "SELASA", "RABU", "KAMIS", "JUM'AT"];
+export const days = [
+  "MINGGU",
+  "SENIN",
+  "SELASA",
+  "RABU",
+  "KAMIS",
+  "JUM'AT",
+  "SABTU",
+];

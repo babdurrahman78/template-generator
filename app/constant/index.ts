@@ -49,8 +49,24 @@ const {
   ASRAMA_AKHWAT,
 } = TEMPAT;
 
+type NAMA_JALSAH =
+  | "TADZKIRATUS_SAMI"
+  | "TIBYAN_FII_ADAB_HAMALATIL_QURAN"
+  | "TAHFIZH_9"
+  | "TAHFIZH_10"
+  | "ARBAIN_NAWAWIYAH"
+  | "AJURUMIYYAH"
+  | "QALAIDUL_IQYAN"
+  | "GHAYAH_WA_TAQRIB"
+  | "MINHAJUL_QASHIDIN"
+  | "TAJWID_BISA"
+  | "SHARAF_BISA"
+  | "HIWAR"
+  | "TASMI_IKH"
+  | "TASMI_AKH";
+
 export const JALSAH: {
-  [key: string]: IJalsah;
+  [key in NAMA_JALSAH]: IJalsah;
 } = {
   TADZKIRATUS_SAMI: {
     nama: "Tadzkiratus Sami wal Mutakallim Fi Adabil Alim wal Muta'allim",
@@ -130,13 +146,14 @@ export const WAKTU = {
 };
 
 type IAngkatan = "PESAN_9" | "PESAN_10";
+export interface IJadwal {
+  JALSAH: IJalsah;
+  TEMPAT?: string;
+}
 
 export const JADWAL: {
   [key: string]: {
-    [key in IAngkatan]: {
-      JALSAH: IJalsah;
-      TEMPAT?: string;
-    } | null;
+    [key in IAngkatan]: IJadwal | null;
   };
 } = {
   AHAD_MLM: {
