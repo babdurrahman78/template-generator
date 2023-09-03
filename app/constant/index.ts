@@ -25,6 +25,7 @@ export const TEMPAT = {
   TMPT_COMB: "Masjid Al - Ikhlas(Ikhwan) dan Asrama Akhwat(Akhwat)",
   TMPT_COMB1: "Maktabah Atas PESAN BISA(Ikhwan) dan Asrama Akhwat(Akhwat)",
   TMPT_COMB2: "Maktabah Bawah PESAN BISA(Ikhwan) dan Asrama Akhwat(Akhwat)",
+  ASRAMA_AKHWAT: "Asrama Akhwat",
 } as const;
 
 const {
@@ -45,6 +46,7 @@ const {
   TMPT_COMB,
   TMPT_COMB1,
   TMPT_COMB2,
+  ASRAMA_AKHWAT,
 } = TEMPAT;
 
 export const JALSAH: {
@@ -98,8 +100,11 @@ export const JALSAH: {
     nama: "Hiwar Al-Mumtaz",
     pengajar: ABID_ZHAFIRAH,
   },
-  TASMI: {
-    nama: "Tasmi'",
+  TASMI_IKH: {
+    nama: "Tasmi' (Ikhwan)",
+  },
+  TASMI_AKH: {
+    nama: "Tasmi' (Akhwat)",
   },
 } as const;
 
@@ -116,14 +121,28 @@ const {
   TAJWID_BISA,
   SHARAF_BISA,
   HIWAR,
-  TASMI,
+  TASMI_IKH,
+  TASMI_AKH,
 } = JALSAH;
 
-export const JADWAL = {
+export const WAKTU = {
+  MLM: new Date().setHours(20),
+};
+
+type IAngkatan = "PESAN_9" | "PESAN_10";
+
+export const JADWAL: {
+  [key: string]: {
+    [key in IAngkatan]: {
+      JALSAH: IJalsah;
+      TEMPAT?: string;
+    } | null;
+  };
+} = {
   AHAD_MLM: {
     PESAN_9: {
-      JALSAH: TASMI,
-      TEMPAT: null,
+      JALSAH: TASMI_IKH,
+      TEMPAT: MAKTABAH_BAWAH,
     },
     PESAN_10: null,
   },
@@ -225,5 +244,12 @@ export const JADWAL = {
       JALSAH: HIWAR,
       TEMPAT: MAKTABAH_ATAS,
     },
+  },
+  SABTU_PG: {
+    PESAN_9: {
+      JALSAH: TASMI_AKH,
+      TEMPAT: ASRAMA_AKHWAT,
+    },
+    PESAN_10: null,
   },
 };
