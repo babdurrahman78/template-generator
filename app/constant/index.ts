@@ -1,4 +1,4 @@
-import { IJalsah } from "../interfaces";
+import { IJadwal, IJalsah } from "../interfaces";
 
 export const PENGAJAR = {
   ABID: "Ust. Abid Fathurrahman Arif, S.Hum.",
@@ -142,14 +142,11 @@ const {
 } = JALSAH;
 
 export const WAKTU = {
-  MLM: new Date().setHours(20),
+  MLM: "20.00 - 21.00 WIB",
+  PG: "05.30 - 06.30 WIB",
 };
 
 type IAngkatan = "PESAN_9" | "PESAN_10";
-export interface IJadwal {
-  JALSAH: IJalsah;
-  TEMPAT?: string;
-}
 
 export const JADWAL: {
   [key: string]: {
@@ -160,6 +157,7 @@ export const JADWAL: {
     PESAN_9: {
       JALSAH: TASMI_IKH,
       TEMPAT: MAKTABAH_BAWAH,
+      WAKTU: WAKTU.MLM,
     },
     PESAN_10: null,
   },
@@ -167,105 +165,127 @@ export const JADWAL: {
     PESAN_9: {
       JALSAH: TAHFIZH_9,
       TEMPAT: AL_IKHLAS,
+      WAKTU: WAKTU.PG,
     },
     PESAN_10: {
       JALSAH: TAHFIZH_10,
+      TEMPAT: AL_IKHLAS,
+      WAKTU: WAKTU.PG,
     },
   },
   SENIN_MLM: {
     PESAN_9: {
       JALSAH: TADZKIRATUS_SAMI,
       TEMPAT: AL_IKHLAS,
+      WAKTU: WAKTU.MLM,
     },
     PESAN_10: {
       JALSAH: MINHAJUL_QASHIDIN,
       TEMPAT: MAKTABAH_BAWAH,
+      WAKTU: WAKTU.MLM,
     },
   },
   SELASA_PG: {
     PESAN_9: {
       JALSAH: TIBYAN_FII_ADAB_HAMALATIL_QURAN,
       TEMPAT: AL_IKHLAS,
+      WAKTU: WAKTU.PG,
     },
     PESAN_10: {
       JALSAH: QALAIDUL_IQYAN,
       TEMPAT: MAKTABAH_BAWAH,
+      WAKTU: WAKTU.PG,
     },
   },
   SELASA_MLM: {
     PESAN_9: {
       JALSAH: TADZKIRATUS_SAMI,
       TEMPAT: AL_IKHLAS,
+      WAKTU: WAKTU.MLM,
     },
     PESAN_10: {
       JALSAH: MINHAJUL_QASHIDIN,
       TEMPAT: MAKTABAH_BAWAH,
+      WAKTU: WAKTU.MLM,
     },
   },
   RABU_PG: {
     PESAN_9: {
       JALSAH: TAHFIZH_9,
       TEMPAT: TMPT_COMB,
+      WAKTU: WAKTU.PG,
     },
     PESAN_10: {
       JALSAH: TAHFIZH_10,
       TEMPAT: TMPT_COMB,
+      WAKTU: WAKTU.PG,
     },
   },
   RABU_MLM: {
     PESAN_9: {
       JALSAH: ARBAIN_NAWAWIYAH,
       TEMPAT: MAKTABAH_BAWAH,
+      WAKTU: WAKTU.MLM,
     },
     PESAN_10: {
       JALSAH: TAJWID_BISA,
       TEMPAT: TMPT_COMB1,
+      WAKTU: WAKTU.MLM,
     },
   },
   KAMIS_PG: {
     PESAN_9: {
       JALSAH: AJURUMIYYAH,
       TEMPAT: TMPT_COMB2,
+      WAKTU: WAKTU.PG,
     },
     PESAN_10: {
       JALSAH: SHARAF_BISA,
       TEMPAT: TMPT_COMB1,
+      WAKTU: WAKTU.PG,
     },
   },
   KAMIS_MLM: {
     PESAN_9: {
       JALSAH: TIBYAN_FII_ADAB_HAMALATIL_QURAN,
       TEMPAT: MAKTABAH_BAWAH,
+      WAKTU: WAKTU.MLM,
     },
     PESAN_10: {
       JALSAH: SHARAF_BISA,
       TEMPAT: TMPT_COMB1,
+      WAKTU: WAKTU.MLM,
     },
   },
   JUMAT_PG: {
     PESAN_9: {
       JALSAH: QALAIDUL_IQYAN,
       TEMPAT: MAKTABAH_BAWAH,
+      WAKTU: WAKTU.PG,
     },
     PESAN_10: {
       JALSAH: TAHFIZH_10,
       TEMPAT: TMPT_COMB,
+      WAKTU: WAKTU.PG,
     },
   },
   JUMAT_MLM: {
     PESAN_9: {
       JALSAH: GHAYAH_WA_TAQRIB,
       TEMPAT: MAKTABAH_BAWAH,
+      WAKTU: WAKTU.MLM,
     },
     PESAN_10: {
       JALSAH: HIWAR,
       TEMPAT: MAKTABAH_ATAS,
+      WAKTU: WAKTU.MLM,
     },
   },
   SABTU_PG: {
     PESAN_9: {
       JALSAH: TASMI_AKH,
       TEMPAT: ASRAMA_AKHWAT,
+      WAKTU: WAKTU.PG,
     },
     PESAN_10: null,
   },
