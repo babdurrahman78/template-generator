@@ -1,4 +1,4 @@
-import { PENGAJAR, TEMPAT, WAKTU } from "./constant";
+import { PENGAJAR, WAKTU } from "./constant";
 
 type PENGAJAR_KEY = (typeof PENGAJAR)[keyof typeof PENGAJAR];
 

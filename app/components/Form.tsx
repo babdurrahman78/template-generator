@@ -4,7 +4,7 @@ interface IFormProps {
   data: IJadwal;
 }
 
-const Form = ({ data: { JALSAH, WAKTU, TEMPAT } }: IFormProps) => {
+const Form = ({ data: { JALSAH, TEMPAT } }: IFormProps) => {
   return (
     <div className="grid gap-6 p-3 mb-6 md:grid-cols-2">
       <div>

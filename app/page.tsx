@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Form from "./components/form";
 import { scheduler } from "./lib/scheduler";
 import stringJalsah from "./lib/stringJalsah";
 import { IJadwal, IMappedJadwal } from "./interfaces";
+import Form from "./components/Form";
 
 export default function Home() {
   const [stringJadwal, setStringJadwal] = useState("");
@@ -19,12 +19,18 @@ export default function Home() {
 
       tempStringJadwal = `*[ TADZKIR JALSAH ]*\n\nبسم الله الرحمن الرحيم\n\nInsyaAllah akan diadakan kegiatan Jalsah dengan detail sebagai berikut:\n\n*PESAN 9*\n${
         malam.PESAN_9
-          ? `${stringJalsah(malam.PESAN_9!)}\n${stringJalsah(pagi.PESAN_9!)}`
-          : stringJalsah(pagi.PESAN_9!)
+          ? `${stringJalsah("MALAM", malam.PESAN_9!)}\n${stringJalsah(
+              "PAGI",
+              pagi.PESAN_9!
+            )}`
+          : stringJalsah("PAGI", pagi.PESAN_9!)
       }\n*PESAN 10*\n${
         malam.PESAN_10
-          ? `${stringJalsah(malam.PESAN_10!)}\n${stringJalsah(pagi.PESAN_10!)}`
-          : stringJalsah(pagi.PESAN_10!)
+          ? `${stringJalsah("MALAM", malam.PESAN_10!)}\n${stringJalsah(
+              "PAGI",
+              pagi.PESAN_10!
+            )}`
+          : stringJalsah("PAGI", pagi.PESAN_10!)
       }\n\nDiharapkan seluruh mahasantri dapat hadir tepat waktu agar tidak terlambat dan senantiasa menjaga adab thalibul ilmi.`;
 
       setStringJadwal(tempStringJadwal);
@@ -34,7 +40,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center sm:px-10 px-3 py-5">
       <div className="min-w-[300px] w-full">
-        {/* <Form data={res?.malam.PESAN_9!} /> */}
+        {/* <Form data={.malam.PESAN_9!} /> */}
 
         <label
           htmlFor="message"
