@@ -7,10 +7,12 @@ export interface IJalsah {
   pengajar?: PENGAJAR_KEY;
 }
 
+export type IWaktu = (typeof WAKTU)[keyof typeof WAKTU];
+
 export interface IJadwal {
   JALSAH: IJalsah;
   TEMPAT?: string;
-  WAKTU: (typeof WAKTU)[keyof typeof WAKTU];
+  WAKTU: IWaktu;
 }
 
 export interface IMappedJadwal extends IJadwal {
@@ -38,3 +40,8 @@ export type NAMA_JALSAH =
   | "HIWAR"
   | "TASMI_IKH"
   | "TASMI_AKH";
+
+export interface IScheduler {
+  malam: IJadwalHarian;
+  pagi: IJadwalHarian;
+}

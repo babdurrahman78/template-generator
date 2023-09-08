@@ -9,11 +9,6 @@ const stringJalsah = (waktu: "MALAM" | "PAGI", jalsah?: IJadwal) => {
   const date = new Date();
   const tomorrow = new Date(new Date().setDate(date.getDate() + 1));
 
-  console.log({
-    date,
-    tomorrow,
-  });
-
   const hijri = new Intl.DateTimeFormat("in-u-ca-islamic-nu-latn", {
     day: "numeric",
     month: "long",

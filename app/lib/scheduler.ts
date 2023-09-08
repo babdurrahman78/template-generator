@@ -1,7 +1,8 @@
 import { JADWAL } from "../constant";
 import { days } from "../constant/days";
+import { IScheduler } from "../interfaces";
 
-export const scheduler = () => {
+export const scheduler = (): IScheduler | null => {
   const date = new Date();
   const day = date.getDay();
 
@@ -26,7 +27,7 @@ export const scheduler = () => {
         malam: JADWAL.KAMIS_MLM,
         pagi: JADWAL.JUMAT_PG,
       };
-    case "JUMAT":
+    case "JUM'AT":
       return {
         malam: JADWAL.JUMAT_MLM,
         pagi: JADWAL.SABTU_PG,
