@@ -6,7 +6,7 @@ export const scheduler = (): IScheduler | null => {
   const date = new Date();
   const day = date.getDay();
 
-  switch (days[day]) {
+  switch (days[1]) {
     case "SENIN":
       return {
         malam: JADWAL.SENIN_MLM,

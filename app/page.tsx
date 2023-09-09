@@ -22,33 +22,36 @@ export default function Home() {
 
   // const JadwalContext = createContext<IScheduler | undefined>(undefined);
 
+  const formString = (res: IScheduler) => {
+    const { malam, pagi } = res;
+    const tempStringJadwal = `*[ TADZKIR JALSAH ]*\n\nبسم الله الرحمن الرحيم\n\nInsyaAllah akan diadakan kegiatan Jalsah dengan detail sebagai berikut:\n\n*PESAN 9*\n${
+      malam.PESAN_9
+        ? `${stringJalsah("MALAM", malam.PESAN_9!)}${
+            pagi.PESAN_9 ? `\n${stringJalsah("PAGI", pagi.PESAN_9)}\n` : "\n"
+          }`
+        : `${stringJalsah("PAGI", pagi.PESAN_10!)}\n`
+    }*PESAN 10*\n${
+      malam.PESAN_10
+        ? `${stringJalsah("MALAM", malam.PESAN_10!)}${
+            pagi.PESAN_10 ? `\n${stringJalsah("PAGI", pagi.PESAN_10)}\n` : "\n"
+          }`
+        : `${stringJalsah("PAGI", pagi.PESAN_10!)}\n`
+    }\nDiharapkan seluruh mahasantri dapat hadir tepat waktu agar tidak terlambat dan senantiasa menjaga adab thalibul ilmi.`;
+    setStringJadwal(tempStringJadwal);
+  };
+
   useEffect(() => {
     const res = scheduler();
 
-    let tempStringJadwal = "Jangan belajar terus!";
     if (res) {
-      const { malam, pagi } = res;
-
+      formString(res);
       setData(res);
-
-      tempStringJadwal = `*[ TADZKIR JALSAH ]*\n\nبسم الله الرحمن الرحيم\n\nInsyaAllah akan diadakan kegiatan Jalsah dengan detail sebagai berikut:\n\n*PESAN 9*\n${
-        malam.PESAN_9
-          ? `${stringJalsah("MALAM", malam.PESAN_9!)}${
-              pagi.PESAN_9 ? `\n${stringJalsah("PAGI", pagi.PESAN_9)}\n` : "\n"
-            }`
-          : `${stringJalsah("PAGI", pagi.PESAN_10!)}\n`
-      }*PESAN 10*\n${
-        malam.PESAN_10
-          ? `${stringJalsah("MALAM", malam.PESAN_10!)}${
-              pagi.PESAN_10
-                ? `\n${stringJalsah("PAGI", pagi.PESAN_10)}\n`
-                : "\n"
-            }`
-          : `${stringJalsah("PAGI", pagi.PESAN_10!)}\n`
-      }\nDiharapkan seluruh mahasantri dapat hadir tepat waktu agar tidak terlambat dan senantiasa menjaga adab thalibul ilmi.`;
-      setStringJadwal(tempStringJadwal);
     }
   }, []);
+
+  useEffect(() => {
+    formString(data);
+  }, [data]);
 
   return (
     <JadwalContext.Provider value={{ data, setData }}>

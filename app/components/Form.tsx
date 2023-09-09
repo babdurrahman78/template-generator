@@ -1,18 +1,45 @@
 import { useContext, useEffect } from "react";
-import { IJadwal, IWaktu } from "../interfaces";
+import { IAngkatan, IJadwal, IJalsah, IWaktu } from "../interfaces";
 import { JadwalContext } from "../context";
+import { PENGAJAR, WAKTU, JALSAH as NAMA_JALSAH } from "../constant";
 
 interface IFormProps {
-  data: IJadwal;
+  angkatan: IAngkatan;
+  jadwal: IJadwal;
 }
 
-const Form = ({ data }: IFormProps) => {
-  const { setData } = useContext(JadwalContext);
-  if (!data) return null;
+const Form = ({ jadwal, angkatan }: IFormProps) => {
+  const { data, setData } = useContext(JadwalContext);
+  if (!jadwal) return null;
 
-  const { JALSAH, WAKTU, TEMPAT } = data;
+  const { JALSAH, TEMPAT } = jadwal;
 
-  const handleEdit = () => {};
+  const handleEdit = (
+    field: "JALSAH" | "WAKTU" | "TEMPAT",
+    value: any,
+    subfield?: "nama" | "pengajar"
+  ) => {
+    const tempData = { ...data };
+
+    const tempAngkatan =
+      tempData[jadwal.WAKTU === WAKTU.MLM ? "malam" : "pagi"][angkatan];
+
+    if (tempAngkatan) {
+      if (field === "JALSAH") {
+        tempData[jadwal.WAKTU === WAKTU.MLM ? "malam" : "pagi"][angkatan]![
+          field
+        ][subfield!] = value;
+      } else {
+        tempData[jadwal.WAKTU === WAKTU.MLM ? "malam" : "pagi"][angkatan]![
+          field
+        ] = value;
+      }
+    }
+
+    setData({ ...tempData });
+  };
+
+  console.log(Object.keys(NAMA_JALSAH));
 
   return (
     <div className="grid gap-6 p-3 rounded-md border border-white mb-6 md:grid-cols-2">
@@ -23,14 +50,18 @@ const Form = ({ data }: IFormProps) => {
         >
           Jalsah
         </label>
-        <input
-          type="text"
+        <select
           id="jalsah"
+          value={JALSAH.nama}
+          onChange={(e) => handleEdit("JALSAH", e.target.value, "nama")}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Nama Jalsah"
-          defaultValue={JALSAH?.nama}
-          required
-        />
+        >
+          {Object.values(NAMA_JALSAH).map((item, index) => (
+            <option value={item.nama} key={index}>
+              {item.nama}
+            </option>
+          ))}
+        </select>
       </div>
       <div>
         <label
@@ -39,14 +70,18 @@ const Form = ({ data }: IFormProps) => {
         >
           Pemateri
         </label>
-        <input
-          type="text"
-          id="pemateri"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Doe"
+        <select
+          id="jalsah"
           value={JALSAH.pengajar}
-          required
-        />
+          onChange={(e) => handleEdit("JALSAH", e.target.value, "pengajar")}
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+          {Object.values(PENGAJAR).map((item, index) => (
+            <option value={item} key={index}>
+              {item}
+            </option>
+          ))}
+        </select>
       </div>
       <div>
         <label
@@ -91,6 +126,7 @@ const Form = ({ data }: IFormProps) => {
           placeholder="PESAN BISA"
           required
           value={TEMPAT}
+          onChange={(e) => handleEdit("TEMPAT", e.target.value)}
         />
       </div>
     </div>
