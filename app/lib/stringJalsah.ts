@@ -1,7 +1,10 @@
-import { JALSAH } from "../constant";
 import { IJadwal } from "../interfaces";
 
-const stringJalsah = (waktu: "MALAM" | "PAGI", jalsah?: IJadwal) => {
+const stringJalsah = (
+  waktu: "MALAM" | "PAGI",
+  isTasmi: boolean,
+  jalsah?: IJadwal
+) => {
   if (!jalsah) {
     return;
   }
@@ -28,10 +31,6 @@ const stringJalsah = (waktu: "MALAM" | "PAGI", jalsah?: IJadwal) => {
     weekday: "long",
     year: "numeric",
   }).format(tomorrow);
-
-  const isTasmi =
-    jalsah.JALSAH.nama === JALSAH.TASMI_AKH.nama ||
-    jalsah.JALSAH.nama === JALSAH.TASMI_IKH.nama;
 
   return `*${jalsah.JALSAH.nama}*\n*${isTasmi ? "Oleh" : "Pemateri"}: ${
     isTasmi ? "" : jalsah.JALSAH.pengajar

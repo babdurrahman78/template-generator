@@ -1,11 +1,12 @@
 "use client";
 
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { scheduler } from "./lib/scheduler";
 import stringJalsah from "./lib/stringJalsah";
 import { IScheduler } from "./interfaces";
 import FormWrapper from "./components/FormWrapper";
 import { JadwalContext } from "./context";
+import { NAMA_JALSAH } from "./constant";
 
 export default function Home() {
   const [stringJadwal, setStringJadwal] = useState("");
@@ -20,22 +21,60 @@ export default function Home() {
     },
   });
 
-  // const JadwalContext = createContext<IScheduler | undefined>(undefined);
-
   const formString = (res: IScheduler) => {
     const { malam, pagi } = res;
+    if (malam.PESAN_9) {
+      console.log(true);
+      console.log(malam.PESAN_9.JALSAH.nama);
+      console.log(NAMA_JALSAH.TASMI_IKH.nama);
+      console.log(NAMA_JALSAH);
+    }
     const tempStringJadwal = `*[ TADZKIR JALSAH ]*\n\nبسم الله الرحمن الرحيم\n\nInsyaAllah akan diadakan kegiatan Jalsah dengan detail sebagai berikut:\n\n*PESAN 9*\n${
       malam.PESAN_9
-        ? `${stringJalsah("MALAM", malam.PESAN_9!)}${
-            pagi.PESAN_9 ? `\n${stringJalsah("PAGI", pagi.PESAN_9)}\n` : "\n"
+        ? `${stringJalsah(
+            "MALAM",
+            malam.PESAN_9.JALSAH.nama === NAMA_JALSAH.TASMI_IKH.nama ||
+              malam.PESAN_9.JALSAH.nama === NAMA_JALSAH.TASMI_AKH.nama,
+            malam.PESAN_9!
+          )}${
+            pagi.PESAN_9
+              ? `\n${stringJalsah(
+                  "PAGI",
+                  pagi.PESAN_9.JALSAH.nama === NAMA_JALSAH.TASMI_IKH.nama ||
+                    pagi.PESAN_9.JALSAH.nama === NAMA_JALSAH.TASMI_AKH.nama,
+                  pagi.PESAN_9
+                )}\n`
+              : "\n"
           }`
-        : `${stringJalsah("PAGI", pagi.PESAN_10!)}\n`
+        : `${stringJalsah(
+            "PAGI",
+            pagi.PESAN_9?.JALSAH.nama === NAMA_JALSAH.TASMI_IKH.nama ||
+              pagi.PESAN_9?.JALSAH.nama === NAMA_JALSAH.TASMI_AKH.nama,
+            pagi.PESAN_9!
+          )}\n`
     }*PESAN 10*\n${
       malam.PESAN_10
-        ? `${stringJalsah("MALAM", malam.PESAN_10!)}${
-            pagi.PESAN_10 ? `\n${stringJalsah("PAGI", pagi.PESAN_10)}\n` : "\n"
+        ? `${stringJalsah(
+            "MALAM",
+            malam.PESAN_10.JALSAH.nama === NAMA_JALSAH.TASMI_IKH.nama ||
+              malam.PESAN_10.JALSAH.nama === NAMA_JALSAH.TASMI_AKH.nama,
+            malam.PESAN_10!
+          )}${
+            pagi.PESAN_10
+              ? `\n${stringJalsah(
+                  "PAGI",
+                  pagi.PESAN_10?.JALSAH.nama === NAMA_JALSAH.TASMI_IKH.nama ||
+                    pagi.PESAN_10?.JALSAH.nama === NAMA_JALSAH.TASMI_AKH.nama,
+                  pagi.PESAN_10
+                )}\n`
+              : "\n"
           }`
-        : `${stringJalsah("PAGI", pagi.PESAN_10!)}\n`
+        : `${stringJalsah(
+            "PAGI",
+            pagi.PESAN_10?.JALSAH.nama === NAMA_JALSAH.TASMI_IKH.nama ||
+              pagi.PESAN_10?.JALSAH.nama === NAMA_JALSAH.TASMI_AKH.nama,
+            pagi.PESAN_10!
+          )}\n`
     }\nDiharapkan seluruh mahasantri dapat hadir tepat waktu agar tidak terlambat dan senantiasa menjaga adab thalibul ilmi.`;
     setStringJadwal(tempStringJadwal);
   };

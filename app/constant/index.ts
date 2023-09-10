@@ -1,4 +1,4 @@
-import { IJadwal, IJalsah } from "../interfaces";
+import { IJadwal, IJalsah, TYPE_JALSAH } from "../interfaces";
 
 export const PENGAJAR = {
   ABID: "Ust. Abid Fathurrahman Arif, S.Hum.",
@@ -26,6 +26,7 @@ export const TEMPAT = {
   TMPT_COMB1: "Maktabah Atas PESAN BISA(Ikhwan) dan Asrama Akhwat(Akhwat)",
   TMPT_COMB2: "Maktabah Bawah PESAN BISA(Ikhwan) dan Asrama Akhwat(Akhwat)",
   ASRAMA_AKHWAT: "Asrama Akhwat",
+  ONLINE: "Online",
 } as const;
 
 const {
@@ -49,24 +50,8 @@ const {
   ASRAMA_AKHWAT,
 } = TEMPAT;
 
-type NAMA_JALSAH =
-  | "TADZKIRATUS_SAMI"
-  | "TIBYAN_FII_ADAB_HAMALATIL_QURAN"
-  | "TAHFIZH_9"
-  | "TAHFIZH_10"
-  | "ARBAIN_NAWAWIYAH"
-  | "AJURUMIYYAH"
-  | "QALAIDUL_IQYAN"
-  | "GHAYAH_WA_TAQRIB"
-  | "MINHAJUL_QASHIDIN"
-  | "TAJWID_BISA"
-  | "SHARAF_BISA"
-  | "HIWAR"
-  | "TASMI_IKH"
-  | "TASMI_AKH";
-
-export const JALSAH: {
-  [key in NAMA_JALSAH]: IJalsah;
+export const NAMA_JALSAH: {
+  [key in TYPE_JALSAH]: IJalsah;
 } = {
   TADZKIRATUS_SAMI: {
     nama: "Tadzkiratus Sami wal Mutakallim Fi Adabil Alim wal Muta'allim",
@@ -77,11 +62,11 @@ export const JALSAH: {
     pengajar: ABID,
   },
   TAHFIZH_9: {
-    nama: "Halaqah Tahfiz Al-Qur'an",
+    nama: "Halaqah Tahfiz Al-Qur'an PESAN 9",
     pengajar: THFZH_9,
   },
   TAHFIZH_10: {
-    nama: "Halaqah Tahfiz Al-Qur'an",
+    nama: "Halaqah Tahfiz Al-Qur'an PESAN 10",
     pengajar: THFZH_10,
   },
   ARBAIN_NAWAWIYAH: {
@@ -118,9 +103,11 @@ export const JALSAH: {
   },
   TASMI_IKH: {
     nama: "Tasmi' (Ikhwan)",
+    pengajar: null,
   },
   TASMI_AKH: {
     nama: "Tasmi' (Akhwat)",
+    pengajar: null,
   },
 } as const;
 
@@ -139,7 +126,7 @@ const {
   HIWAR,
   TASMI_IKH,
   TASMI_AKH,
-} = JALSAH;
+} = NAMA_JALSAH;
 
 export const WAKTU = {
   MLM: "20.00 - 21.00 WIB",
@@ -155,7 +142,7 @@ export const JADWAL: {
 } = {
   AHAD_MLM: {
     PESAN_9: {
-      JALSAH: TASMI_IKH,
+      JALSAH: { ...TASMI_IKH },
       TEMPAT: MAKTABAH_BAWAH,
       WAKTU: WAKTU.MLM,
     },
@@ -163,7 +150,7 @@ export const JADWAL: {
   },
   SENIN_PG: {
     PESAN_9: {
-      JALSAH: TAHFIZH_9,
+      JALSAH: { ...TAHFIZH_9 },
       TEMPAT: AL_IKHLAS,
       WAKTU: WAKTU.PG,
     },
@@ -175,19 +162,19 @@ export const JADWAL: {
   },
   SENIN_MLM: {
     PESAN_9: {
-      JALSAH: TADZKIRATUS_SAMI,
+      JALSAH: { ...TADZKIRATUS_SAMI },
       TEMPAT: AL_IKHLAS,
       WAKTU: WAKTU.MLM,
     },
     PESAN_10: {
-      JALSAH: MINHAJUL_QASHIDIN,
+      JALSAH: { ...MINHAJUL_QASHIDIN },
       TEMPAT: MAKTABAH_BAWAH,
       WAKTU: WAKTU.MLM,
     },
   },
   SELASA_PG: {
     PESAN_9: {
-      JALSAH: TIBYAN_FII_ADAB_HAMALATIL_QURAN,
+      JALSAH: { ...TIBYAN_FII_ADAB_HAMALATIL_QURAN },
       TEMPAT: AL_IKHLAS,
       WAKTU: WAKTU.PG,
     },
@@ -199,91 +186,91 @@ export const JADWAL: {
   },
   SELASA_MLM: {
     PESAN_9: {
-      JALSAH: TADZKIRATUS_SAMI,
+      JALSAH: { ...TADZKIRATUS_SAMI },
       TEMPAT: AL_IKHLAS,
       WAKTU: WAKTU.MLM,
     },
     PESAN_10: {
-      JALSAH: MINHAJUL_QASHIDIN,
+      JALSAH: { ...MINHAJUL_QASHIDIN },
       TEMPAT: MAKTABAH_BAWAH,
       WAKTU: WAKTU.MLM,
     },
   },
   RABU_PG: {
     PESAN_9: {
-      JALSAH: TAHFIZH_9,
+      JALSAH: { ...TAHFIZH_9 },
       TEMPAT: TMPT_COMB,
       WAKTU: WAKTU.PG,
     },
     PESAN_10: {
-      JALSAH: TAHFIZH_10,
+      JALSAH: { ...TAHFIZH_10 },
       TEMPAT: TMPT_COMB,
       WAKTU: WAKTU.PG,
     },
   },
   RABU_MLM: {
     PESAN_9: {
-      JALSAH: ARBAIN_NAWAWIYAH,
+      JALSAH: { ...ARBAIN_NAWAWIYAH },
       TEMPAT: MAKTABAH_BAWAH,
       WAKTU: WAKTU.MLM,
     },
     PESAN_10: {
-      JALSAH: TAJWID_BISA,
+      JALSAH: { ...TAJWID_BISA },
       TEMPAT: TMPT_COMB1,
       WAKTU: WAKTU.MLM,
     },
   },
   KAMIS_PG: {
     PESAN_9: {
-      JALSAH: AJURUMIYYAH,
+      JALSAH: { ...AJURUMIYYAH },
       TEMPAT: TMPT_COMB2,
       WAKTU: WAKTU.PG,
     },
     PESAN_10: {
-      JALSAH: SHARAF_BISA,
+      JALSAH: { ...SHARAF_BISA },
       TEMPAT: TMPT_COMB1,
       WAKTU: WAKTU.PG,
     },
   },
   KAMIS_MLM: {
     PESAN_9: {
-      JALSAH: TIBYAN_FII_ADAB_HAMALATIL_QURAN,
+      JALSAH: { ...TIBYAN_FII_ADAB_HAMALATIL_QURAN },
       TEMPAT: MAKTABAH_BAWAH,
       WAKTU: WAKTU.MLM,
     },
     PESAN_10: {
-      JALSAH: SHARAF_BISA,
+      JALSAH: { ...SHARAF_BISA },
       TEMPAT: TMPT_COMB1,
       WAKTU: WAKTU.MLM,
     },
   },
   JUMAT_PG: {
     PESAN_9: {
-      JALSAH: QALAIDUL_IQYAN,
+      JALSAH: { ...QALAIDUL_IQYAN },
       TEMPAT: MAKTABAH_BAWAH,
       WAKTU: WAKTU.PG,
     },
     PESAN_10: {
-      JALSAH: TAHFIZH_10,
+      JALSAH: { ...TAHFIZH_10 },
       TEMPAT: TMPT_COMB,
       WAKTU: WAKTU.PG,
     },
   },
   JUMAT_MLM: {
     PESAN_9: {
-      JALSAH: GHAYAH_WA_TAQRIB,
+      JALSAH: { ...GHAYAH_WA_TAQRIB },
       TEMPAT: MAKTABAH_BAWAH,
       WAKTU: WAKTU.MLM,
     },
     PESAN_10: {
-      JALSAH: HIWAR,
+      JALSAH: { ...HIWAR },
       TEMPAT: MAKTABAH_ATAS,
       WAKTU: WAKTU.MLM,
     },
   },
   SABTU_PG: {
     PESAN_9: {
-      JALSAH: TASMI_AKH,
+      JALSAH: { ...TASMI_AKH },
       TEMPAT: ASRAMA_AKHWAT,
       WAKTU: WAKTU.PG,
     },

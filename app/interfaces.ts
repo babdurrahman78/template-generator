@@ -4,7 +4,7 @@ type PENGAJAR_KEY = (typeof PENGAJAR)[keyof typeof PENGAJAR];
 
 export interface IJalsah {
   nama: string;
-  pengajar?: PENGAJAR_KEY;
+  pengajar: PENGAJAR_KEY | null;
 }
 
 export type IWaktu = (typeof WAKTU)[keyof typeof WAKTU];
@@ -25,7 +25,7 @@ export type IJadwalHarian = {
   [key in IAngkatan]: IJadwal | null;
 };
 
-export type NAMA_JALSAH =
+export type TYPE_JALSAH =
   | "TADZKIRATUS_SAMI"
   | "TIBYAN_FII_ADAB_HAMALATIL_QURAN"
   | "TAHFIZH_9"
