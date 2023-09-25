@@ -13,6 +13,7 @@ export interface IJadwal {
   JALSAH: IJalsah;
   TEMPAT?: string;
   WAKTU: IWaktu;
+  TANGGAL: Date;
 }
 
 export interface IMappedJadwal extends IJadwal {
@@ -44,4 +45,13 @@ export type TYPE_JALSAH =
 export interface IScheduler {
   malam: IJadwalHarian;
   pagi: IJadwalHarian;
+}
+
+export interface IThullab {
+  nama: string;
+  angkatan: "PESAN 9" | "PESAN 10";
+  jurusan: string;
+  kampus: string;
+  tahun: number;
+  jenisKelamin: "laki" | "perempuan";
 }

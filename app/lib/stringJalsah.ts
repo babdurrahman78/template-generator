@@ -9,38 +9,37 @@ const stringJalsah = (
     return;
   }
 
-  const date = new Date();
-  const tomorrow = new Date(new Date().setDate(date.getDate() + 1));
+  const tomorrow = new Date(new Date().setDate(jalsah.TANGGAL.getDate() + 1));
+
+  const hijriDate = jalsah.WAKTU.isMalam
+    ? new Date(new Date().setDate(jalsah.TANGGAL.getDate() + 1))
+    : jalsah.TANGGAL;
 
   const hijri = new Intl.DateTimeFormat("in-u-ca-islamic-nu-latn", {
     day: "numeric",
     month: "long",
     year: "numeric",
-  }).format(tomorrow);
+  }).format(hijriDate);
 
   const gregorian = new Intl.DateTimeFormat("in", {
     day: "numeric",
     month: "long",
     weekday: "long",
     year: "numeric",
-  }).format(date);
+  }).format(jalsah.TANGGAL);
 
-  const gregorianTomorrow = new Intl.DateTimeFormat("in", {
-    day: "numeric",
-    month: "long",
-    weekday: "long",
-    year: "numeric",
-  }).format(tomorrow);
+  // const gregorianTomorrow = new Intl.DateTimeFormat("in", {
+  //   day: "numeric",
+  //   month: "long",
+  //   weekday: "long",
+  //   year: "numeric",
+  // }).format(tomorrow);
 
   return `*${jalsah.JALSAH.nama}*\n*${isTasmi ? "Oleh" : "Pemateri"}: ${
     isTasmi ? "" : jalsah.JALSAH.pengajar
-  }*\n*Tanggal: ${
-    waktu === "MALAM"
-      ? `${gregorian}/ ${hijri}`
-      : `${gregorianTomorrow}/ ${hijri}`
-  }*\n*Waktu: ${jalsah.WAKTU.mulai} - ${jalsah.WAKTU.akhir} WIB*\n*Tempat: ${
-    jalsah.TEMPAT
-  }*\n`;
+  }*\n*Tanggal: ${`${gregorian}/ ${hijri}`}*\n*Waktu: ${jalsah.WAKTU.mulai} - ${
+    jalsah.WAKTU.akhir
+  } WIB*\n*Tempat: ${jalsah.TEMPAT}*\n`;
 };
 
 export default stringJalsah;

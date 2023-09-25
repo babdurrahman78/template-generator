@@ -16,10 +16,10 @@ const FormWrapper = () => {
     <div className="rounded-md border p-3 space-y-3 border-white">
       <p>PESAN 9</p>
       {<Form angkatan="PESAN_9" jadwal={malam?.PESAN_9!} />}
-      {<Form angkatan="PESAN_10" jadwal={pagi?.PESAN_9!} />}
+      {<Form angkatan="PESAN_9" jadwal={pagi?.PESAN_9!} />}
 
       <p>PESAN 10</p>
-      {<Form angkatan="PESAN_9" jadwal={malam?.PESAN_10!} />}
+      {<Form angkatan="PESAN_10" jadwal={malam?.PESAN_10!} />}
       {<Form angkatan="PESAN_10" jadwal={pagi?.PESAN_10!} />}
     </div>
   );

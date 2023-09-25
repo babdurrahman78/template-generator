@@ -20,16 +20,16 @@ const Form = ({ jadwal, angkatan }: IFormProps) => {
   const { JALSAH, TEMPAT } = jadwal;
 
   const handleEdit = (
-    field: "JALSAH" | "WAKTU" | "TEMPAT",
+    field: "JALSAH" | "WAKTU" | "TEMPAT" | "TANGGAL",
     value: any,
     subJalsah?: "nama" | "pengajar" | null,
     subWaktu?: "mulai" | "akhir"
   ) => {
     const tempData = { ...data };
+    console.log(tempData);
 
     const tempAngkatan =
       tempData[jadwal.WAKTU.isMalam ? "malam" : "pagi"][angkatan];
-
     if (tempAngkatan) {
       if (field === "JALSAH") {
         tempData[jadwal.WAKTU.isMalam ? "malam" : "pagi"][angkatan]![field][
@@ -39,6 +39,9 @@ const Form = ({ jadwal, angkatan }: IFormProps) => {
         tempData[jadwal.WAKTU.isMalam ? "malam" : "pagi"][angkatan]![field][
           subWaktu!
         ] = value;
+      } else if (field === "TANGGAL") {
+        tempData[jadwal.WAKTU.isMalam ? "malam" : "pagi"][angkatan]![field] =
+          new Date(value);
       } else {
         tempData[jadwal.WAKTU.isMalam ? "malam" : "pagi"][angkatan]![field] =
           value;
@@ -48,7 +51,14 @@ const Form = ({ jadwal, angkatan }: IFormProps) => {
     setData({ ...tempData });
   };
 
-  useEffect(() => {}, []);
+  const handleDate = (e: Date) => {
+    const monthPlus = e.getMonth() + 1;
+    const month = monthPlus % 10 === monthPlus ? `0${monthPlus}` : monthPlus;
+    const date =
+      e.getDate() % 10 === e.getDate() ? `0${e.getDate()}` : e.getDate();
+    const value = `${e.getFullYear()}-${month}-${date}`;
+    return value;
+  };
 
   return (
     <div className="grid gap-6 p-3 rounded-md border border-white mb-6 md:grid-cols-2">
@@ -103,7 +113,8 @@ const Form = ({ jadwal, angkatan }: IFormProps) => {
           type="date"
           id="tanggal"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Flowbite"
+          onChange={(e) => handleEdit("TANGGAL", e.target.value)}
+          value={handleDate(jadwal?.TANGGAL)}
           required
         />
       </div>
@@ -141,7 +152,7 @@ const Form = ({ jadwal, angkatan }: IFormProps) => {
           Tempat
         </label>
         <select
-          id="jalsah"
+          id="tempat"
           value={TEMPAT}
           onChange={(e) => handleEdit("TEMPAT", e.target.value)}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -161,7 +172,7 @@ const Form = ({ jadwal, angkatan }: IFormProps) => {
           URL
         </label>
         <select
-          id="jalsah"
+          id="url"
           value={TEMPAT}
           onChange={(e) => handleEdit("TEMPAT", e.target.value)}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
