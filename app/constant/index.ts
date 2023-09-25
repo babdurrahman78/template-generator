@@ -1,21 +1,21 @@
 import { IJadwal, IJalsah, TYPE_JALSAH } from "../interfaces";
 
 export const PENGAJAR = {
-  ABID: "Ust. Abid Fathurrahman Arif, S.Hum.",
-  NUR_FAJRI: "Ust. Nur Fajri Romadhon, B.Sh., M.A.",
-  AZMI: "Ust. Lalu Naufal Azmi",
-  BUKHORI: "Ust. Bukhori Linkun, B.Sh.",
-  FADHILAH: "Ustzh. Fadhilatul Mu'minah",
-  ZHAFIRAH: "Ustzh. Zhafiratul Magfirah",
+  ABID: "Ustadz Abid Fathurrahman Arif, S.Hum.",
+  NUR_FAJRI: "Ustadz Nur Fajri Romadhon, B.Sh., M.A.",
+  AZMI: "Ustadz Lalu Naufal Azmi",
+  BUKHORI: "Ustadz Bukhori Linkun, B.Sh.",
+  FADHILAH: "Ustadzah Fadhilatul Mu'minah",
+  ZHAFIRAH: "Ustadzah Zhafiratul Magfirah",
   THFZH_9:
-    "Ust. Abid Fathurrahman Arif S.Hum., dan Ust. Lalu Naufal Azmi (Ikhwan), Ustzh. Zhafiratul Magfirah (Akhwat)",
+    "Ustadz Abid Fathurrahman Arif S.Hum., dan Ustadz Lalu Naufal Azmi (Ikhwan), Ustadzah Zhafiratul Magfirah (Akhwat)",
   THFZH_10:
-    "Ust. Abid Fathurrahman Arif S.Hum., dan Ust. Lalu Naufal Azmi (Ikhwan), Ustzh. Fadhilatul Mu'minah (Akhwat)",
+    "Ustadz Abid Fathurrahman Arif S.Hum., dan Ustadz Lalu Naufal Azmi (Ikhwan), Ustadzah Fadhilatul Mu'minah (Akhwat)",
   ABID_FADHILATUL:
-    "Ust. Abid Fathurrahman Arif, S.Hum. dan Ustzh. Fadhilatul Mu'minah",
-  AZMI_ZHAFIRAH: "Ust. Lalu Naufal Azmi dan Ustzh. Zhafiratul Magfirah",
+    "Ustadz Abid Fathurrahman Arif, S.Hum. dan Ustadzah Fadhilatul Mu'minah",
+  AZMI_ZHAFIRAH: "Ustadz Lalu Naufal Azmi dan Ustadzah Zhafiratul Magfirah",
   ABID_ZHAFIRAH:
-    "Ust. Abid Fathurrahman Arif, S.Hum. dan Ustzh. Zhafiratul Magfirah",
+    "Ustadz Abid Fathurrahman Arif, S.Hum. dan Ustadzah Zhafiratul Magfirah",
 };
 
 export const TEMPAT = {
@@ -129,8 +129,16 @@ const {
 } = NAMA_JALSAH;
 
 export const WAKTU = {
-  MLM: "20.00 - 21.00 WIB",
-  PG: "05.30 - 06.30 WIB",
+  MLM: {
+    mulai: "20:00",
+    akhir: "21:00",
+    isMalam: true,
+  },
+  PG: {
+    mulai: "05:30",
+    akhir: "06:30",
+    isMalam: false,
+  },
 };
 
 type IAngkatan = "PESAN_9" | "PESAN_10";
@@ -247,12 +255,12 @@ export const JADWAL: {
   JUMAT_PG: {
     PESAN_9: {
       JALSAH: { ...QALAIDUL_IQYAN },
-      TEMPAT: MAKTABAH_BAWAH,
+      TEMPAT: AL_IKHLAS,
       WAKTU: WAKTU.PG,
     },
     PESAN_10: {
       JALSAH: { ...TAHFIZH_10 },
-      TEMPAT: TMPT_COMB,
+      TEMPAT: TMPT_COMB2,
       WAKTU: WAKTU.PG,
     },
   },

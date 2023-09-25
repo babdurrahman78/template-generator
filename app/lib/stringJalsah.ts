@@ -16,7 +16,7 @@ const stringJalsah = (
     day: "numeric",
     month: "long",
     year: "numeric",
-  }).format(date);
+  }).format(tomorrow);
 
   const gregorian = new Intl.DateTimeFormat("in", {
     day: "numeric",
@@ -38,7 +38,9 @@ const stringJalsah = (
     waktu === "MALAM"
       ? `${gregorian}/ ${hijri}`
       : `${gregorianTomorrow}/ ${hijri}`
-  }*\n*Waktu: ${jalsah.WAKTU}*\n*Tempat: ${jalsah.TEMPAT}*\n`;
+  }*\n*Waktu: ${jalsah.WAKTU.mulai} - ${jalsah.WAKTU.akhir} WIB*\n*Tempat: ${
+    jalsah.TEMPAT
+  }*\n`;
 };
 
 export default stringJalsah;

@@ -23,12 +23,6 @@ export default function Home() {
 
   const formString = (res: IScheduler) => {
     const { malam, pagi } = res;
-    if (malam.PESAN_9) {
-      console.log(true);
-      console.log(malam.PESAN_9.JALSAH.nama);
-      console.log(NAMA_JALSAH.TASMI_IKH.nama);
-      console.log(NAMA_JALSAH);
-    }
     const tempStringJadwal = `*[ TADZKIR JALSAH ]*\n\nبسم الله الرحمن الرحيم\n\nInsyaAllah akan diadakan kegiatan Jalsah dengan detail sebagai berikut:\n\n*PESAN 9*\n${
       malam.PESAN_9
         ? `${stringJalsah(

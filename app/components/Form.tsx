@@ -22,34 +22,33 @@ const Form = ({ jadwal, angkatan }: IFormProps) => {
   const handleEdit = (
     field: "JALSAH" | "WAKTU" | "TEMPAT",
     value: any,
-    subfield?: "nama" | "pengajar"
+    subJalsah?: "nama" | "pengajar" | null,
+    subWaktu?: "mulai" | "akhir"
   ) => {
     const tempData = { ...data };
 
     const tempAngkatan =
-      tempData[jadwal.WAKTU === WAKTU.MLM ? "malam" : "pagi"][angkatan];
+      tempData[jadwal.WAKTU.isMalam ? "malam" : "pagi"][angkatan];
 
     if (tempAngkatan) {
       if (field === "JALSAH") {
-        tempData[jadwal.WAKTU === WAKTU.MLM ? "malam" : "pagi"][angkatan]![
-          field
-        ][subfield!] = value;
-
-        console.log(
-          tempData[jadwal.WAKTU === WAKTU.MLM ? "malam" : "pagi"][angkatan]![
-            field
-          ][subfield!]
-        );
-      } else {
-        tempData[jadwal.WAKTU === WAKTU.MLM ? "malam" : "pagi"][angkatan]![
-          field
+        tempData[jadwal.WAKTU.isMalam ? "malam" : "pagi"][angkatan]![field][
+          subJalsah!
         ] = value;
+      } else if (field === "WAKTU") {
+        tempData[jadwal.WAKTU.isMalam ? "malam" : "pagi"][angkatan]![field][
+          subWaktu!
+        ] = value;
+      } else {
+        tempData[jadwal.WAKTU.isMalam ? "malam" : "pagi"][angkatan]![field] =
+          value;
       }
     }
-    console.log(tempData);
 
     setData({ ...tempData });
   };
+
+  useEffect(() => {}, []);
 
   return (
     <div className="grid gap-6 p-3 rounded-md border border-white mb-6 md:grid-cols-2">
@@ -115,12 +114,24 @@ const Form = ({ jadwal, angkatan }: IFormProps) => {
         >
           Waktu
         </label>
-        <input
-          type="time"
-          id="waktu"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          required
-        />
+        <div className="grid gap-6 md:grid-cols-2">
+          <input
+            type="time"
+            id="waktuAwal"
+            value={jadwal.WAKTU.mulai}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            required
+            onChange={(e) => handleEdit("WAKTU", e.target.value, null, "mulai")}
+          />
+          <input
+            type="time"
+            id="waktuAkhir"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            required
+            value={jadwal.WAKTU.akhir}
+            onChange={(e) => handleEdit("WAKTU", e.target.value, null, "akhir")}
+          />
+        </div>
       </div>
       <div>
         <label
