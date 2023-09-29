@@ -6,6 +6,8 @@ import {
   WAKTU,
   NAMA_JALSAH,
   TEMPAT as NAMA_TEMPAT,
+  THULLAB,
+  JUZ,
 } from "../constant";
 
 interface IFormProps {
@@ -22,19 +24,20 @@ const Form = ({ jadwal, angkatan }: IFormProps) => {
   const handleEdit = (
     field: "JALSAH" | "WAKTU" | "TEMPAT" | "TANGGAL",
     value: any,
-    subJalsah?: "nama" | "pengajar" | null,
+    subJalsah?: "nama" | "pengajar" | "oleh" | "juz" | null,
     subWaktu?: "mulai" | "akhir"
   ) => {
     const tempData = { ...data };
-    console.log(tempData);
 
     const tempAngkatan =
       tempData[jadwal.WAKTU.isMalam ? "malam" : "pagi"][angkatan];
     if (tempAngkatan) {
       if (field === "JALSAH") {
-        tempData[jadwal.WAKTU.isMalam ? "malam" : "pagi"][angkatan]![field][
-          subJalsah!
-        ] = value;
+        if (subJalsah) {
+          tempData[jadwal.WAKTU.isMalam ? "malam" : "pagi"][angkatan]![field][
+            subJalsah
+          ] = value;
+        }
       } else if (field === "WAKTU") {
         tempData[jadwal.WAKTU.isMalam ? "malam" : "pagi"][angkatan]![field][
           subWaktu!
@@ -60,6 +63,10 @@ const Form = ({ jadwal, angkatan }: IFormProps) => {
     return value;
   };
 
+  const isTasmi =
+    jadwal.JALSAH.nama === NAMA_JALSAH.TASMI_AKH.nama ||
+    jadwal.JALSAH.nama === NAMA_JALSAH.TASMI_IKH.nama;
+
   return (
     <div className="grid gap-6 p-3 rounded-md border border-white mb-6 md:grid-cols-2">
       <div>
@@ -82,26 +89,71 @@ const Form = ({ jadwal, angkatan }: IFormProps) => {
           ))}
         </select>
       </div>
-      <div>
-        <label
-          htmlFor="pemateri"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Pemateri
-        </label>
-        <select
-          id="jalsah"
-          value={JALSAH.pengajar || ""}
-          onChange={(e) => handleEdit("JALSAH", e.target.value, "pengajar")}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        >
-          {Object.values(PENGAJAR).map((item, index) => (
-            <option value={item} key={index}>
-              {item}
-            </option>
-          ))}
-        </select>
-      </div>
+      {isTasmi ? (
+        <div>
+          <label
+            htmlFor="oleh"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Oleh
+          </label>
+          <select
+            id="jalsah"
+            value={JALSAH.oleh}
+            onChange={(e) => handleEdit("JALSAH", e.target.value, "oleh")}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          >
+            {THULLAB.map((item, index) => (
+              <option value={item.nama} key={index}>
+                {item.nama}
+              </option>
+            ))}
+          </select>
+        </div>
+      ) : (
+        <div>
+          <label
+            htmlFor="pemateri"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Pemateri
+          </label>
+          <select
+            id="pengajar"
+            value={JALSAH.pengajar || ""}
+            onChange={(e) => handleEdit("JALSAH", e.target.value, "pengajar")}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          >
+            {Object.values(PENGAJAR).map((item, index) => (
+              <option value={item} key={index}>
+                {item}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+      {isTasmi && (
+        <div>
+          <label
+            htmlFor="juz"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Juz
+          </label>
+          <select
+            id="juz"
+            value={JALSAH?.juz}
+            onChange={(e) => handleEdit("JALSAH", e.target.value, "juz")}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          >
+            {JUZ.map((item, index) => (
+              <option value={item} key={index}>
+                {item}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
       <div>
         <label
           htmlFor="tanggal"

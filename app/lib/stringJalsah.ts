@@ -28,18 +28,9 @@ const stringJalsah = (
     year: "numeric",
   }).format(jalsah.TANGGAL);
 
-  // const gregorianTomorrow = new Intl.DateTimeFormat("in", {
-  //   day: "numeric",
-  //   month: "long",
-  //   weekday: "long",
-  //   year: "numeric",
-  // }).format(tomorrow);
-
-  return `*${jalsah.JALSAH.nama}*\n*${isTasmi ? "Oleh" : "Pemateri"}: ${
-    isTasmi ? "" : jalsah.JALSAH.pengajar
-  }*\n*Tanggal: ${`${gregorian}/ ${hijri}`}*\n*Waktu: ${jalsah.WAKTU.mulai} - ${
-    jalsah.WAKTU.akhir
-  } WIB*\n*Tempat: ${jalsah.TEMPAT}*\n`;
+  return `*${jalsah.JALSAH.nama}*\n*${isTasmi ? "Oleh" : "Pemateri"}: ${isTasmi ? jalsah.JALSAH.oleh || "" : jalsah.JALSAH.pengajar
+    }*\n${isTasmi ? `*Juz Bacaan: Juz ${jalsah.JALSAH.juz || ""}*\n` : ""}*Tanggal: ${`${gregorian}/ ${hijri}`}*\n*Waktu: ${jalsah.WAKTU.mulai} - ${jalsah.WAKTU.akhir
+    } WIB*\n*Tempat: ${jalsah.TEMPAT}*\n`;
 };
 
 export default stringJalsah;

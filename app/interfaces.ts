@@ -1,10 +1,15 @@
-import { PENGAJAR, WAKTU } from "./constant";
+import { JUZ, NAMA_THULLAB_CONST, PENGAJAR, WAKTU } from "./constant";
 
 type PENGAJAR_KEY = (typeof PENGAJAR)[keyof typeof PENGAJAR];
 
+export type INama_Thullab = (typeof NAMA_THULLAB_CONST)[number];
+
+export type IJuz = (typeof JUZ)[number];
 export interface IJalsah {
   nama: string;
-  pengajar: PENGAJAR_KEY | null;
+  pengajar?: PENGAJAR_KEY | null;
+  oleh?: INama_Thullab;
+  juz?: IJuz;
 }
 
 export type IWaktu = (typeof WAKTU)[keyof typeof WAKTU];

@@ -502,3 +502,9 @@ export const THULLAB: IThullab[] = [
     tahun: 2021,
   },
 ];
+
+export const NAMA_THULLAB_CONST = Array.from(
+  new Set(THULLAB.map((item) => item.nama))
+);
+
+export const JUZ = Array.from({ length: 30 }, (_, index) => (index + 1).toString());
